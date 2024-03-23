@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import pickle
 
 app = Flask(__name__)
 
@@ -14,8 +15,11 @@ def greeting():
 
 @app.route('/test', methods=['GET'])
 def homepage():
-    return ("This is the test page!")
+    return jsonify({'text':"Python blyt",
+                    'Pree':404}), 200
 
+with open("./Model/LyricsGenerator/model.pkl", "rb") as input_file:
+    model = pickle.load(input_file)
 
 if __name__ == '__main__':
     app.run(debug=True)
